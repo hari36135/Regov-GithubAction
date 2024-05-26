@@ -2,7 +2,7 @@
 
 Greetings Team,
 
-I'm pleased to share that as per the task requirements, I've implemented a four-stage pipeline comprising QA (code quality check), dev, UAT, and prod environments. This pipeline facilitates the deployment of AWS resources across multiple environments with manual approval steps. The process involves deploying IAM roles via Terraform. Initially, SonarQube conducts code quality checks, providing insights into code smells, accessible via the SonarQube console. Subsequently, upon completion of the code quality check, the remaining stages are deployed following the necessary approvals.
+I'm pleased to share that as per the task requirements, I've implemented a four-stage pipeline comprising QA (code quality check), dev, UAT, and prod environments. This pipeline facilitates the deployment of AWS resources across multiple environments with manual approval steps. The process involves deploying IAM roles from the main branch via Terraform. Initially, SonarQube conducts code quality checks, providing insights into code smells, accessible via the SonarQube console. Subsequently, upon completion of the code quality check, the remaining stages are deployed following the necessary approvals.
 
 Please note: The installation of SonarQube is not included in this repository. I have configured SonarQube separately and obtained the required credentials.
 
