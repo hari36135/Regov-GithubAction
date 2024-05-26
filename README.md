@@ -6,7 +6,7 @@ I'm pleased to share that as per the task requirements, I've implemented a four-
 
 Please note: The installation of SonarQube is not included in this repository. I have configured SonarQube separately and obtained the required credentials.
 
-Tools/Technologies Utilized:
+**Tools/Technologies Utilized:**
 
 1. GitHub Re-usable Workflows
 2. Terraform
@@ -14,6 +14,9 @@ Tools/Technologies Utilized:
 4. SonarQube
 5. GitHub Environments, Secrets
 
+**Pipeline structure:**
+
+![image](https://github.com/hari36135/Regov-GithubAction/assets/58912507/6ee7ca90-18fb-46f9-8da0-67789c4fc918)
 
     ## Directory Structure
     ```shell
