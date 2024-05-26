@@ -1,0 +1,56 @@
+name: "Regov-hari"
+on:
+  workflow_dispatch:
+
+jobs:
+
+  Code-Quality-Check:
+    name: Code-Quality-Check
+    runs-on: ubuntu-latest
+    permissions: read-all
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
+      - uses: sonarsource/sonarqube-scan-action@master
+        with:
+          projectBaseDir: .
+          args: >
+            # -Dsonar.organization=my-org
+            -Dsonar.projectKey="terraform"
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
+  Dev:
+    needs: Code-Quality-Check
+    if: github.ref == 'refs/heads/main'
+    uses: hari36135/regov-gitreusableflows/.github/workflows/aws_tf_appy.yml@main
+    with:
+      path: IAMRoles
+      tf_vars_file: dev.tfvars
+      gh_environment: dev
+    secrets:
+      cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
+
+  UAT:
+    needs: Dev
+    if: github.ref == 'refs/heads/main'
+    uses: hari36135/regov-gitreusableflows/.github/workflows/aws_tf_appy.yml@main
+    with:
+      path: IAMRoles
+      tf_vars_file: uat.tfvars
+      gh_environment: uat
+    secrets:
+      cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
+
+  Prod:
+    needs: UAT
+    if: github.ref == 'refs/heads/main'
+    uses: hari36135/regov-gitreusableflows/.github/workflows/aws_tf_appy.yml@main
+    with:
+      path: IAMRoles
+      tf_vars_file: prod.tfvars
+      gh_environment: prod
+    secrets:
+      cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
+
